@@ -1,16 +1,27 @@
-# Use GitHub Actions to Deploy to Vercel
+# Day2
 
-Angular project with Github Actions for preview and production deployment to [Vercel](https://vercel.com).
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.2.
 
-🍿 YouTube Tutorial: https://youtu.be/FHVaWZjWec4
+## Development server
 
-## The Pipelines
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-Have a look at the pipelines in this repository. Both require some environment variables (`VERCEL_TOKEN`, `VERCEL_PROJECT_ID` and `VERCEL_ORG_ID`) which are configured via the GitHub repository settings.
+## Code scaffolding
 
-- [preview.yaml](.github/workflows/preview.yaml): testing & preview deployment for all pushes to all branches except `main`
-- [production.yaml](.github/workflows/production.yaml): production deployment for all pushes to `main`
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Vercel config
+## Build
 
-To initially create a Vercel project from your local machine, install Vercel CLI via `npm i -g vercel`, login with `vercel login` and then run `vercel link`. This will create a project in the Vercel cloud and furthermore it will create a subfolder `.vercel` in your project where you can find the `projectId` and the `orgId` which you need to run the pipelines. Furthermore you need a API acess token. You can get this directly [from Vercel](https://vercel.com/account/tokens).
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

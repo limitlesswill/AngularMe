@@ -1,0 +1,58 @@
+<div class="container-fluid p-5 accordion  mt-5">
+    <div class="row-1 mx-auto text-center ">
+        <label class="px-3 "><b appCustomDirective>Category: </b></label>
+        <select class="text-center mb-5" [(ngModel)]="Selected">
+            @for(cat of categories; track $index)
+            {
+            <option [value]="cat">{{cat.toUpperCase()}}</option>
+            }
+        </select>
+    </div>
+
+    <div class="row">
+
+        @if(productlist.length > 0)
+        {
+        <table class="table table-hover border-primary text-center align-middle">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Description</th>
+                <th scope="col">Available</th>
+            </thead>
+            <tbody class="table-group-divider border-primary ">
+                @switch (Selected) {
+                @case ("books"){
+                @for(product of getlist("books"); track product.id)
+                {
+                <tr>
+                    <td><img src="{{product.imgUrl}}" width="100" height="50" alt="..." /></td>
+                    <td [style.color]="COLOR">{{product.name | uppercase}}</td>
+                    <td [ngClass]="{'fw-bold': product.price > 3000 }">{{product.price | customPipe}}</td>
+                    <td>{{product.description}}</td>
+                    <td [ngStyle]="{'color':product.isAvaliable ? 'green' : 'red'}">{{product.isAvaliable ? 'Yes' :
+                        'No'}}</td>
+                </tr>
+                }
+                }
+                @default() {
+                @for(product of getlist(); track product.id)
+                {
+                <tr>
+                    <td><img src="{{product.imgUrl}}" width="100" height="50" alt="..." /></td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.description}}</td>
+                    <td>{{product.isAvaliable ? 'Yes' : 'No'}}</td>
+                </tr>
+                }
+
+                }
+                }
+            </tbody>
+        </table>
+        }
+
+    </div>
+</div>
