@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../Services/product.service';
 import { Subscription } from 'rxjs';
+import { CARDSComponent } from "../cards/cards.component";
 
 @Component({
-  selector: 'app-product-list',
-  standalone: true,
-  imports: [FormsModule, CommonModule],
-  templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css'
+    selector: 'app-product-list',
+    standalone: true,
+    templateUrl: './product-list.component.html',
+    styleUrl: './product-list.component.css',
+    imports: [FormsModule, CommonModule, CARDSComponent]
 })
 export class ProductListComponent implements OnInit, OnDestroy {
   categories: string[] = ["laptops", "books", "glasses"];
@@ -35,15 +36,21 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   sub!: Subscription;
+  data: string | any;
 
   ngOnInit(): void {
     this.sub = this.productservice.getAll().subscribe({
       next: product => {
         // this.productlist = product;
         // this.filterList = this.productlist;
+        this.data = product;
+        this.data = this.data[0].data.children[0].data;
+        console.log(this.data.title);
+
       },
       error: err => console.log(err)
     });
+
   }
 
   ngOnDestroy(): void {
@@ -114,5 +121,4 @@ export class ProductListComponent implements OnInit, OnDestroy {
       }
     ];
   }
-
 }

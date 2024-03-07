@@ -6,7 +6,7 @@ import { Observable, catchError, tap, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-  private url: string = 'https://www.reddit.com/r/aww/random.json?include_over_18=off';
+  private url: string = 'https://www.reddit.com/r/programmerhumor/random.json?include_over_18=off';
 
   constructor(private client: HttpClient) { }
 
@@ -14,8 +14,12 @@ export class ProductService {
     return this.client.get<string>(this.url)
       .pipe(
         //debugger
+        //retry(3)
         tap(
-          (ele) => console.log(ele),
+          (ele) => {
+            // if (ele == "url" || ele == "title" || ele == 'selftext')
+            // this.data.push(ele);
+          },
           catchError(this.errorCatching)
         )
       );
