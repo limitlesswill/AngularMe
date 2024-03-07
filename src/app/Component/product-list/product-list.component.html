@@ -1,12 +1,16 @@
-<div class="container-fluid p-5 accordion  mt-5">
-    <div class="row-1 mx-auto text-center ">
-        <label class="px-3 "><b appCustomDirective>Category: </b></label>
-        <select class="text-center mb-5" [(ngModel)]="Selected">
+<div class="container-fluid p-5 accordion justify-content-center mt-5">
+    <div class="row-1 text-center">
+        <label class="p-3"><b>Filter by name : </b></label>
+        <input [(ngModel)]="filterText" class="p-1" />
+
+        <label class="p-3"><b>Category: </b></label>
+        <select class="text-center py-2 px-1 mb-5" [(ngModel)]="Selected">
             @for(cat of categories; track $index)
             {
             <option [value]="cat">{{cat.toUpperCase()}}</option>
             }
         </select>
+        <button class="btn btn-primary m-3 p-2 px-5" (click)="resetTools()">Reset</button>
     </div>
 
     <div class="row">
@@ -20,36 +24,43 @@
                 <th scope="col">Price</th>
                 <th scope="col">Description</th>
                 <th scope="col">Available</th>
+                <th scope="col">Category</th>
             </thead>
             <tbody class="table-group-divider border-primary ">
                 @switch (Selected) {
-                @case ("books"){
-                @for(product of getlist("books"); track product.id)
-                {
-                <tr>
-                    <td><img src="{{product.imgUrl}}" width="100" height="50" alt="..." /></td>
-                    <td [style.color]="COLOR">{{product.name | uppercase}}</td>
-                    <td [ngClass]="{'fw-bold': product.price > 3000 }">{{product.price | customPipe}}</td>
-                    <td>{{product.description}}</td>
-                    <td [ngStyle]="{'color':product.isAvaliable ? 'green' : 'red'}">{{product.isAvaliable ? 'Yes' :
-                        'No'}}</td>
-                </tr>
-                }
-                }
-                @default() {
+                @case (""){
                 @for(product of getlist(); track product.id)
                 {
+                @if(filterList(filterText).includes(product) == true){
                 <tr>
-                    <td><img src="{{product.imgUrl}}" width="100" height="50" alt="..." /></td>
+                    <td><img width="90" height="70" src="{{product.imgUrl}}" alt="..." /></td>
                     <td>{{product.name}}</td>
                     <td>{{product.price}}</td>
                     <td>{{product.description}}</td>
                     <td>{{product.isAvaliable ? 'Yes' : 'No'}}</td>
+                    <td>{{product.category}}</td>
                 </tr>
+                }
+                }
+                }
+                @default() {
+                @for(product of getlist(Selected); track product.id)
+                {
+                @if(filterList(filterText).includes(product) == true){
+                <tr>
+                    <td><img width="90" height="70" src="{{product.imgUrl}}" alt="..." /></td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.description}}</td>
+                    <td>{{product.isAvaliable ? 'Yes' : 'No'}}</td>
+                    <td>{{product.category}}</td>
+                </tr>
+                }
                 }
 
                 }
                 }
+
             </tbody>
         </table>
         }
