@@ -1,24 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Iproduct } from '../../Models/iproduct';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { ProductService } from '../../Services/product.service';
-import { Subscription } from 'rxjs';
-import { CARDSComponent } from "../cards/cards.component";
+import { RouterModule } from '@angular/router';
 
 @Component({
-    selector: 'app-product-list',
-    standalone: true,
-    templateUrl: './product-list.component.html',
-    styleUrl: './product-list.component.css',
-    imports: [FormsModule, CommonModule, CARDSComponent]
+  selector: 'app-product-list',
+  standalone: true,
+  templateUrl: './product-list.component.html',
+  styleUrl: './product-list.component.css',
+  imports: [FormsModule, RouterModule]
 })
-export class ProductListComponent implements OnInit, OnDestroy {
+export class ProductListComponent {
   categories: string[] = ["laptops", "books", "glasses"];
   productlist: Iproduct[];
   Selected: string = "";
   filterText: string = "";
-  COLOR = "red";
 
 
   getlist(category: string = ''): Iproduct[] {
@@ -35,29 +31,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.filterText = "";
   }
 
-  sub!: Subscription;
-  data: string | any;
-
-  ngOnInit(): void {
-    this.sub = this.productservice.getAll().subscribe({
-      next: product => {
-        // this.productlist = product;
-        // this.filterList = this.productlist;
-        this.data = product;
-        this.data = this.data[0].data.children[0].data;
-        console.log(this.data.title);
-
-      },
-      error: err => console.log(err)
-    });
-
-  }
-
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
-
-  constructor(private productservice: ProductService) {
+  constructor() {
     this.productlist = [
       {
         id: 0,

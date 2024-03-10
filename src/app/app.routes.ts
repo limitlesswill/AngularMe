@@ -1,12 +1,16 @@
 import { Routes } from '@angular/router';
-import { AboutComponent } from './Component/about/about.component';
 import { ProductListComponent } from './Component/product-list/product-list.component';
-import { NotfoundComponent } from './notfound/notfound.component';
+import { AboutComponent } from './Component/about/about.component';
+import { BlogComponent } from './Component/blog/blog.component';
+import { NotfoundComponent } from './Shared/Components/notfound/notfound.component';
+import { ProductDetailsComponent } from './Component/productdetails/productdetails.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: ProductListComponent, title: "Home" },
+    { path: 'home/:id', component: ProductDetailsComponent, title: "Details" },
     { path: 'about', component: AboutComponent, title: "About us" },
+    { path: 'blog', component: BlogComponent, title: "Blog" },
     { path: '**', component: NotfoundComponent, title: "page not found" }
 
 ];

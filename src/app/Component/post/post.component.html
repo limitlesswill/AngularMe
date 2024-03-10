@@ -1,0 +1,25 @@
+<!-- && (this.permalink.length > 20) -->
+@if((this.caption || this.description || this.button))
+{
+<div class="m-5">
+    <img src="{{this.url}}" class="card-img-top img-fluid mx-auto" onerror="this.src='../../../favicon.ico';onerror='';"
+        alt="...">
+    <div class="card-body text-center">
+        @if(this.caption)
+        {
+        <h5 class="card-title">{{this.title}}</h5>
+        }
+        @if(this.description)
+        {
+        <p class="card-text">
+            {{this.selftext.length > 0 ? this.selftext : "posted on " .concat(this.created_utc)}}
+        </p>
+        }
+        @if(this.button)
+        {
+        <a href="https://reddit.com/{{this.permalink}}" class="btn btn-primary" target="_blank">Go to
+            the original post</a>
+        }
+    </div>
+</div>
+}

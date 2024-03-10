@@ -1,0 +1,17 @@
+.card-img-top {
+    height: 220px;
+    width: 200px;
+    object-fit: cover;
+}
+
+.card-text,
+.card-title,
+.card-text {
+    width: 200px;
+    height: 45px;
+    object-fit: cover;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow: hidden;
+}
