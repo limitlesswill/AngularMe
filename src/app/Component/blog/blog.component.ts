@@ -16,10 +16,10 @@ export class BlogComponent {
   ready() {
     this.counter++;
 
-    /* when all posts done successfully loading */
+    /* when all posts done successfully loading  */
     //   if (this.counter >= this.numofposts) {
     //     setTimeout(() => { location.reload() }, 1000);
     //   }
     // }
-
   }
+}
