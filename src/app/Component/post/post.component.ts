@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, booleanAttribute } from '@angular/core';
 import { Subscription, interval, retry, takeUntil } from 'rxjs';
-import { PostService } from '../../Services/post.service';
+import { PostService } from '../../Services/post/post.service';
 
 @Component({
   selector: 'post',

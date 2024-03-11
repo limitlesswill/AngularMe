@@ -16,10 +16,7 @@ export class ProductService {
         //debugger
         //retry(3)
         tap(
-          (ele) => {
-            // if (ele == "url" || ele == "title" || ele == 'selftext')
-            // this.data.push(ele);
-          },
+          (ele) => {},
           catchError(this.errorCatching)
         )
       );
