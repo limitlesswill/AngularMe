@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, booleanAttribute } from '@angular/core';
 import { Subscription, delay, interval, retry, takeUntil } from 'rxjs';
 import { PostService } from '../../Services/post/post.service';
-declare var window: any;
+import { DialogModule } from 'primeng/dialog';
 
 @Component({
   selector: 'post',
   standalone: true,
-  imports: [],
+  imports: [DialogModule],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css'
 })
@@ -38,6 +38,7 @@ export class PostComponent implements OnInit, OnDestroy {
   created_utc: string = "";
   permalink: string = "";
   tmpDate: any = new Date();
+  isModalOpen: boolean = false;
 
   @Output("Done")
   isDone = new EventEmitter<boolean>();
@@ -94,7 +95,7 @@ export class PostComponent implements OnInit, OnDestroy {
       );
   }
 
-  
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
