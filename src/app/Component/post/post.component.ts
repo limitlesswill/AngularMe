@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, booleanAttribute } from '@angular/core';
-import { Subscription, interval, retry, takeUntil } from 'rxjs';
+import { Subscription, delay, interval, retry, takeUntil } from 'rxjs';
 import { PostService } from '../../Services/post/post.service';
+declare var window: any;
 
 @Component({
   selector: 'post',
@@ -53,28 +54,47 @@ export class PostComponent implements OnInit, OnDestroy {
           this.url = this.data.url;
 
           this.tmpDate = new Date(this.data.created_utc * 1000);
-          this.created_utc = this.tmpDate.getDay() + "/" + this.tmpDate.getMonth() + "/" + this.tmpDate.getFullYear();
+          this.created_utc = this.tmpDate.getDate() + "/" + this.tmpDate.getMonth() + "/" + this.tmpDate.getFullYear();
           this.permalink = this.data.permalink;
 
 
-          console.log(post);
-          console.log("title " + this.data.title);
-          console.log("selftext " + this.data.selftext);
-          console.log(this.data.url);
-          console.log("visited " + this.data.visited);
-          console.log("over 18 " + this.data.over_18);
-          console.log("media " + this.data.media);
-          console.log("gallery " + post[0].data.children[0].data.url.includes("gallery"));
+          if (this.data.media || this.data.is_gallery) {
+            console.log(post);
+            console.log("title " + this.data.title);
+            console.log(this.data.url);
+            console.log("media " + this.data.media);
+            console.log("media " + this.data.secure_media_embed.media_domain_url);
+            console.log("gallery " + this.data.is_gallery);
+          }
 
+          /* fixing third-party provider issue [it still needs modification to be suitable for every existing provider] */
+          if (this.data.media != null) {
+            const link: string = this.data.secure_media.oembed.thumbnail_url;
+            const sub = link.split('/')[3];
+            const start = link.indexOf(sub);
+            const end = link.indexOf('?');
+            this.url = this.data.secure_media.oembed.provider_url.concat('/' + link.substring(start, end));
+            console.log("New URL " + this.url);
+          }
+
+          /* fixing gallery issue*/
+          if (this.data.is_gallery != null) {
+            this.url = this.data.thumbnail;
+          }
 
           this.isDone.emit(true);
         },
-        error: err => { console.log("ssssss " + err); }
+        error: err => {
+          console.log("ssssss " + err);
+          delay(500);
+          //I figured out how can i simple recall a service :)
+          return this.ngOnInit();
+        }
       }
       );
   }
 
-
+  
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

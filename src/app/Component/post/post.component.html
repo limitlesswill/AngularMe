@@ -1,17 +1,16 @@
-<!-- && (this.permalink.length > 20) -->
 @if((this.caption || this.description || this.button))
 {
-<div class="m-5">
+<div class="flex-center p-2 border border-1 border-secondary-subtle">
     <img src="{{this.url}}" class="card-img-top img-fluid mx-auto" onerror="this.src='../../../favicon.ico';onerror='';"
-        alt="...">
+        alt="..." />
     <div class="card-body text-center">
         @if(this.caption)
         {
-        <h5 class="card-title">{{this.title}}</h5>
+        <h5 class="card-title flex-center">{{this.title}}</h5>
         }
         @if(this.description)
         {
-        <p class="card-text">
+        <p class="card-text m-0">
             {{this.selftext.length > 0 ? this.selftext : "posted on " .concat(this.created_utc)}}
         </p>
         }
@@ -22,4 +21,16 @@
         }
     </div>
 </div>
+
+<!-- Modal to add later (imgs should contain  data-bs-toggle="modal" data-bs-target="#exampleModal{{this.url}}")
+<div class="modal fade" id="exampleModal{{this.url}}" tabindex="-1" aria-labelledby="exampleModal{{this.url}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <button type="button" class="btn-close bg-danger text-bg-light position-absolute end-0" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            <img src="{{this.url}}" alt="..." />
+        </div>
+    </div>
+</div> -->
+
 }

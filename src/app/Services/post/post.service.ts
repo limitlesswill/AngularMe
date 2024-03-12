@@ -18,31 +18,27 @@ export class PostService {
       .pipe(
         tap(
           (post: string | any) => {
-            if (post[0].data.children[0].data.media
-              || post[0].data.children[0].data.over_18
-              || post[0].data.children[0].data.url === "https://reddit.com/"
-              || post[0].data.children[0].data.url === "https://www.reddit.com/"
-              || post[0].data.children[0].data.url === "https://www.reddit.com"
-              || post[0].data.children[0].data.url == "reddit.com"
-              || post[0].data.children[0].data.url == "www.reddit.com"
-              || post[0].data.children[0].data.url.includes("gallery")
-              ) {
-                
-                
-                // throw new Error('I reject these data');
+            //I reject these data
+            if (post[0].data.children[0].data.is_video || post[0].data.children[0].data.over_18) {
+              console.log(post);
+              throw Error("OH DEAR");
             }
-            
+
           },
-          catchError(this.errorCatching) && retry(1)
-          )
+          catchError(this.errorCatching)
+        )
       );
   }
 
   errorCatching(err: HttpErrorResponse) {
+    /* this is somehow a dead code which needs to optimized out someday*/
+    console.log("I got an ERROR")
     let msg = '';
 
-    if (err.status == 0)
+    if (err.status == 0) {
       msg = err.error.message;
+      console.log(msg);
+    }
     else
       msg = `Server ERROR ${err.status} and error message: ${err.statusText}`
 

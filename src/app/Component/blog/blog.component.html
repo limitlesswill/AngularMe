@@ -1,10 +1,15 @@
-<div class="d-flex flex-row flex-wrap justify-content-center align-items-center bg-body-tertiary bg-opacity-25">
-    @if((counter < numofposts)) { ☹ only <b class="p-1"> {{counter}} </b> posts loaded }@else {😊 posts
-        loaded} </div>
+<body class="bg-body-secondary">
 
-<div class="d-flex flex-row flex-wrap justify-content-center align-items-center">
-    @for(x of [].constructor(numofposts) ;track $index)
-    {
-    <post title txt btn (Done)="ready()"></post>
-    }
-</div>
+    <div class="text-center text-danger bg-black fw-bold fs-5 popover position-sticky top-0 rounded-3 mx-auto" style="z-index: 1;">
+        @if((counter < numofposts)) { ☹ only <b class="p-1"> {{counter}} </b> posts loaded }@else {😊 posts
+            loaded} </div>
+
+    <div class="d-flex flex-row flex-wrap justify-content-center align-items-center bg-body-secondary ">
+        @for(x of [].constructor(numofposts) ;track $index)
+        {
+        <post title txt btn (Done)="ready()" class="m-4 p-3 border border-1 border-secondary-subtle bg-body-tertiary">
+        </post>
+        }
+    </div>
+
+</body>
