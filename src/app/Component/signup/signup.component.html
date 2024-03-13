@@ -1,0 +1,102 @@
+<div class="container-fluid mx-auto row d-flex flex-column justify-content-center align-items-center w-75 m-5">
+    <form #signupForm="ngForm" class="mt-5 w-50 d-flex justify-content-center align-items-center flex-column">
+        <div class="form-group text-center">
+            <label for="exampleInputEmail1">First Name</label>
+            <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp"
+                placeholder="Enter first Name" required minlength="3" name="firstName" [(ngModel)]="user.firstName"
+                #firstNameVar="ngModel"
+                [ngClass]="{'is-invalid': (firstNameVar.touched || firstNameVar.dirty)&& !firstNameVar.valid}">
+
+            <span class="invalid-feedback">
+                @if(firstNameVar.errors?.['required'])
+                {
+                <span>Fist Name is Required</span>
+                }
+                @if(firstNameVar.errors?.['minlength'])
+                {
+                <span>Fist Name must be 5 Charachters</span>
+                }
+            </span>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3" (click)="save(signupForm)">Submit</button>
+    </form>
+
+
+    <div class="mx-auto text-center mt-5">
+        <h6>Touched : {{signupForm.touched}}</h6>
+        <h6>Dirty : {{signupForm.dirty}}</h6>
+        <h6>Valid : {{signupForm.valid}}</h6>
+        <h6>Value : {{signupForm.value | json}}</h6>
+    </div>
+
+    <hr class="mt-5 mb-2" />
+
+
+    <form [formGroup]="form_Group" class="mt-5 w-50 d-flex justify-content-center align-items-center flex-column">
+        <div class="form-group" class="text-center">
+            <label for="exampleInputEmail1">First Name</label>
+            <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp"
+                placeholder="Enter first Name" name="firstName" formControlName="firstName"
+                [ngClass]="{'is-invalid': (firstName?.touched || firstName?.dirty)&& firstName?.invalid}">
+            <span class="invalid-feedback">
+                @if(firstName?.errors?.['required'])
+                {
+                <span>Fist Name is Required</span>
+                }
+                @if(firstName?.errors?.['minlength'])
+                {
+                <span>Fist Name must be 5 Charachters</span>
+                }
+            </span>
+
+            <label for="exampleInputEmail1">Last Name</label>
+            <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp"
+                placeholder="Enter first Name" name="firstName" formControlName="lastName">
+
+            <label for="exampleInputEmail1">Email</label>
+            <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp"
+                placeholder="Enter first Name" name="firstName" formControlName="email">
+        </div>
+
+        <button type="submit" class="btn btn-primary m-2">Submit</button>
+
+
+        <div formArrayName="address">
+            @for(control of address.controls; track $index)
+            {
+            <div [formGroupName]="$index">
+                <div class="row mb-2">
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-6"> <label for="">City Name</label> </div>
+                            <div class="col-6"> <input class="form-control" type="text" formControlName="city"> </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col-6"> <label for="">Street Name</label> </div>
+                            <div class="col-6"> <input class="form-control" type="text" formControlName="street"> </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="row">
+                            <button class="btn btn-danger" (click)="removeAddress($index)">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+        <div class="mb-2">
+            <button type="button" class="btn btn-primary" (click)="addAdress()">Add Adress</button>
+        </div>
+    </form>
+
+
+
+
+
+</div>
