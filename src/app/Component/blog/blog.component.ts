@@ -22,4 +22,9 @@ export class BlogComponent {
     //   }
     // }
   }
+
+  reload() {
+    location.reload();
+  }
+
 }

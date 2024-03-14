@@ -1,0 +1,7 @@
+.fa-refresh {
+    transition: transform 500ms;
+}
+
+.fa-refresh:active {
+    transform: rotateZ(180deg);
+}

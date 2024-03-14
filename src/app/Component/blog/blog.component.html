@@ -1,8 +1,16 @@
 <body class="bg-body-secondary">
 
-    <div class="text-center text-danger bg-black fw-bold fs-5 popover position-sticky top-0 rounded-3 mx-auto" style="z-index: 1;">
-        @if((counter < numofposts)) { ☹ only <b class="p-1"> {{counter}} </b> posts loaded }@else {😊 posts
-            loaded} </div>
+    <div class="text-center text-danger bg-black fw-bold fs-5 popover position-sticky top-0 rounded-3 mx-auto user-select-none flex-row "
+        style="z-index: 1;">
+        @if(counter < numofposts) { ☹ only <b class="p-1"> {{counter}} </b> posts loaded
+            }@else {
+            😊 posts loaded
+            }
+            @if(counter < numofposts) { <i class="fa fa-refresh fa-spin fs-4 float-end mt-1 mx-2"></i>
+                }@else {
+                <i class="fa fa-refresh fs-4 float-end mt-1 mx-2" (mousedown)="reload()"></i>
+                }
+    </div>
 
     <div class="d-flex flex-row flex-wrap justify-content-center align-items-center bg-body-secondary ">
         @for(x of [].constructor(numofposts) ;track $index)
