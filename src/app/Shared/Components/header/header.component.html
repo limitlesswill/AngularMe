@@ -20,13 +20,13 @@
 
             <ul class="navbar-nav ms-auto fw-bold">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" routerLink='/login'>Log in</a>
+                    <a class="nav-link" aria-current="page" routerLink='/login'>{{isLogin ? "Log out" :"Log in"}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" routerLink='/signup'>Signup</a>
+                    <a class="nav-link" aria-current="page" routerLink='/signup' [hidden]="isLogin">Signup</a>
                 </li>
-                <li class="nav-item float-end end-0" [hidden]="!isLogin">
-                    <a class="nav-link" aria-current="page" routerLink='/profile'>Account</a>
+                <li class="nav-item float-end end-0">
+                    <a class="nav-link" aria-current="page" routerLink='/profile' [hidden]="!isLogin">Account</a>
                 </li>
             </ul>
 
