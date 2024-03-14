@@ -22,7 +22,7 @@ export class CustomObservableComponent implements OnInit, OnDestroy {
 
     const obs3 = merge(obs1, obs2);
 
-    obs3.subscribe({
+    this.sub = obs3.subscribe({
       next: (data) => console.log(data)
     });
 
